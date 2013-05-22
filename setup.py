@@ -24,13 +24,14 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
+        'affinitic.db',
         'setuptools',
+        'zope.component',
     ],
     extras_require=dict(
-        test=[
-           'unittest2',
-           'mock',
-         ]),
+        test=['mock',
+              'plone.testing',
+              'unittest2']),
     entry_points="""
     # -*- Entry points: -*-
     """,
