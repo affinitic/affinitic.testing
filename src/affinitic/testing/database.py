@@ -10,6 +10,7 @@ Copyright by Affinitic sprl
 import inspect
 import os
 import sys
+import time
 
 import zope.component
 
@@ -25,6 +26,8 @@ class DatabaseTestCase(case.BaseTestCase):
         try:
             self._execute_sql_files(method='insert')
         except Exception:
+            if not hasattr(result, '_start_time'):
+                result._start_time = time.time()
             result.addError(self, sys.exc_info())
         else:
             super(DatabaseTestCase, self).run(result=result)

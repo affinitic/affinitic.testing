@@ -7,6 +7,8 @@ Licensed under the GPL license, see LICENCE.txt for more details.
 Copyright by Affinitic sprl
 """
 
+import time
+
 from plone.testing import zca
 
 from affinitic import testing as package
@@ -17,14 +19,16 @@ class TestResult(object):
     def __init__(self):
         self.error = 0
         self.success = 0
+        self.errors_times = []
 
     def startTest(self, test_case):
-        return
+        self._start_time = time.time()
 
     def stopTest(self, test_case):
         return
 
     def addError(self, test_case, output):
+        self.errors_times.append(self._start_time)
         self.error += 1
 
     def addSuccess(self, test_case):
