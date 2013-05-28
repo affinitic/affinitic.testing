@@ -107,3 +107,12 @@ class TestBaseTestCase(BaseTestCase):
         self.mock(test_basetestcase, 'message', mock=mock.Mock(return_value=0),
                   return_value=1)
         self.assertEqual(0, test_basetestcase.message())
+
+    def test_multiple_mock(self):
+        from affinitic.testing.tests import test_basetestcase
+        self.mock(test_basetestcase, 'message', return_value=0)
+        self.mock(test_basetestcase, 'message', return_value=1)
+        self.assertEqual(1, test_basetestcase.message())
+        self.unmock(test_basetestcase.message)
+        self.assertEqual(1, len(self._mocks))
+        self.assertEqual('FOO', test_basetestcase.message())

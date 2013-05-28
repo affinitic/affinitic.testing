@@ -7,7 +7,6 @@ Licensed under the GPL license, see LICENCE.txt for more details.
 Copyright by Affinitic sprl
 """
 
-import inspect
 import pickle
 import sys
 import unittest2
@@ -53,20 +52,16 @@ class BaseTestCase(unittest2.TestCase):
             warnings.warn(u'A mock instance and a return value was provided, '
                           u'the mock instance will be used.')
         mock = kw.get('mock', Mock(return_value=kw.get('return_value')))
-        obj_src = source
         obj = getattr(source, obj_name)
-        if inspect.isclass(obj) or inspect.isfunction(obj):
-            path = '%s.%s' % (obj.__module__, obj_name)
-        else:
-            path = '%s.%s.%s' % (obj_src.__module__, obj_src.__name__,
-                obj_name)
+        if isinstance(obj, Mock):
+            self.unmock(obj)
+            obj = getattr(source, obj_name)
         if isinstance(obj, property):
             mock = property(mock)
-        setattr(obj_src, obj_name, mock)
-        self._mocks[self._mock_key(mock)] = {'src': obj_src,
+        setattr(source, obj_name, mock)
+        self._mocks[self._mock_key(mock)] = {'src': source,
                                              'name': obj_name,
-                                             'original': obj,
-                                             'path': path}
+                                             'original': obj}
 
     def unmock(self, obj):
         """ Stop mocking the given function, class or method """
