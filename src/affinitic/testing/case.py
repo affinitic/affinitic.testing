@@ -52,7 +52,7 @@ class BaseTestCase(unittest2.TestCase):
             warnings.warn(u'A mock instance and a return value was provided, '
                           u'the mock instance will be used.')
         mock = kw.get('mock', Mock(return_value=kw.get('return_value')))
-        obj = getattr(source, obj_name)
+        obj = self._get_object(source, obj_name)
         if isinstance(obj, Mock):
             self.unmock(obj)
             obj = getattr(source, obj_name)
@@ -62,6 +62,13 @@ class BaseTestCase(unittest2.TestCase):
         self._mocks[self._mock_key(mock)] = {'src': source,
                                              'name': obj_name,
                                              'original': obj}
+
+    @staticmethod
+    def _get_object(source, obj_name):
+        """ Returns the object from the source """
+        if hasattr(source, '__dict__') and obj_name in source.__dict__:
+            return source.__dict__.get(obj_name)
+        return getattr(source, obj_name)
 
     def unmock(self, obj):
         """ Stop mocking the given function, class or method """

@@ -15,6 +15,7 @@ from affinitic.testing.testing import TestResult
 
 class Monster(object):
     name = u'CERBERUS'
+    _weight = 100
 
     def __init__(self, age):
         self._age = age
@@ -25,6 +26,14 @@ class Monster(object):
     @property
     def age(self):
         return self._age
+
+    @staticmethod
+    def size():
+        return 10
+
+    @classmethod
+    def weight(cls):
+        return cls._weight
 
 
 def message(text=u'FOO'):
@@ -97,6 +106,26 @@ class TestBaseTestCase(BaseTestCase):
 
         self.unmock(Monster.age)
         self.assertEqual(3000, Monster(3000).age)
+
+    def test_mock_staticmethod(self):
+        from affinitic.testing.tests import test_basetestcase
+        self.assertEqual(10, Monster(3000).size())
+        self.assertEqual(10, Monster.size())
+        self.mock(test_basetestcase.Monster, u'size', return_value=5)
+        self.assertEqual(5, Monster(3000).size())
+        self.assertEqual(5, Monster.size())
+
+        self.unmock(Monster.size)
+        self.assertEqual(10, Monster(3000).size())
+        self.assertEqual(10, Monster.size())
+
+    def test_mock_classmethod(self):
+        self.assertEqual(100, Monster.weight())
+        self.mock(Monster, 'weight', return_value=200)
+        self.assertEqual(200, Monster.weight())
+
+        self.unmock(Monster.weight)
+        self.assertEqual(100, Monster.weight())
 
     def test_mock_without_kwargs(self):
         from affinitic.testing.tests import test_basetestcase
