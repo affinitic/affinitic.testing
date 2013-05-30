@@ -36,6 +36,14 @@ class Monster(object):
         return cls._weight
 
 
+class Obj(object):
+    __slots__ = ('attr1', )
+
+    @property
+    def test(self):
+        return 'FOO'
+
+
 def message(text=u'FOO'):
     return text
 
@@ -145,3 +153,9 @@ class TestBaseTestCase(BaseTestCase):
         self.unmock(test_basetestcase.message)
         self.assertEqual(1, len(self._mocks))
         self.assertEqual('FOO', test_basetestcase.message())
+
+    def test_get_object(self):
+        """ Test the _get_object method with an object without __dict__ """
+        test_object = Obj()
+        self.assertEqual(getattr(test_object, 'test'),
+                         self._get_object(test_object, 'test'))
