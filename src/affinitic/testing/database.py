@@ -61,5 +61,5 @@ class DatabaseTestCase(case.BaseTestCase):
 
     def _db_session(self, database):
         """ Returns the %s_session property or the database utility """
-        return getattr(self, '%s_session' % database,
-                       zope.component.getUtility(IDatabase, database).session)
+        return (getattr(self, '%s_session' % database, None) or
+                zope.component.getUtility(IDatabase, database).session)
