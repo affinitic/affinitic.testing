@@ -4,4 +4,4 @@ Changelog
 0.1-dev (unreleased)
 --------------------
 
-- Initial commit
+- Initial release
