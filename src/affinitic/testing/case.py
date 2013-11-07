@@ -58,16 +58,30 @@ class BaseTestCase(unittest2.TestCase):
             obj = getattr(source, obj_name)
         if isinstance(obj, property):
             mock = property(mock)
-        setattr(source, obj_name, mock)
+        self._mock(source, obj_name, mock)
         self._mocks[self._mock_key(mock)] = {'src': source,
                                              'name': obj_name,
                                              'original': obj}
+
+    @staticmethod
+    def _mock(source, obj_name, mock):
+        """ Replace the object on the source by the mock """
+        try:
+            setattr(source, obj_name, mock)
+        except AttributeError, e:
+            if hasattr(source, '__class__'):
+                setattr(source.__class__, obj_name, mock)
+            else:
+                raise e
 
     @staticmethod
     def _get_object(source, obj_name):
         """ Returns the object from the source """
         if hasattr(source, '__dict__') and obj_name in source.__dict__:
             return source.__dict__.get(obj_name)
+        if hasattr(source, '__class__') and \
+           obj_name in source.__class__.__dict__:
+            return getattr(source.__class__, obj_name)
         return getattr(source, obj_name)
 
     def unmock(self, obj):
@@ -83,4 +97,13 @@ class BaseTestCase(unittest2.TestCase):
     def _unmock(self, key):
         """ Unmock a key """
         mock = self._mocks.get(key)
-        setattr(mock.get('src'), mock.get('name'), mock.get('original'))
+        source = mock.get('src')
+        obj_name = mock.get('name')
+        original = mock.get('original')
+        try:
+            setattr(source, obj_name, original)
+        except AttributeError, e:
+            if hasattr(source, '__class__'):
+                setattr(source.__class__, obj_name, original)
+            else:
+                raise e

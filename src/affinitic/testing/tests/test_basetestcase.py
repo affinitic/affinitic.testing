@@ -156,6 +156,6 @@ class TestBaseTestCase(BaseTestCase):
 
     def test_get_object(self):
         """ Test the _get_object method with an object without __dict__ """
-        test_object = Obj()
-        self.assertEqual(getattr(test_object, 'test'),
-                         self._get_object(test_object, 'test'))
+        test_object = Monster(10)
+        self.assertEqual(getattr(test_object, 'size')(),
+                         self._get_object(test_object, 'size')())

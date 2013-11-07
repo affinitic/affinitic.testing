@@ -4,7 +4,7 @@ Changelog
 0.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Fix a problem with the mocking of properties
 
 
 0.1 (2013-09-02)
