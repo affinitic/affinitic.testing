@@ -6,14 +6,16 @@ version = '0.1.2.dev0'
 setup(
     name='affinitic.testing',
     version=version,
-    description="",
+    description="Test tools",
     long_description=open(os.path.join("docs", "HISTORY.txt")).read(),
     # Get more strings from
     # http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         "Programming Language :: Python",
+        "Programming Language :: Python :: 2.4",
+        "Programming Language :: Python :: 2.7",
     ],
-    keywords='',
+    keywords='Test tools',
     author='Affinitic',
     author_email='info@affinitic.be',
     url='http://github.com/affinitic/affinitic.testing/',
