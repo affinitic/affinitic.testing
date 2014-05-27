@@ -11,8 +11,8 @@ setup(
     # Get more strings from
     # http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
-      "Programming Language :: Python",
-      ],
+        "Programming Language :: Python",
+    ],
     keywords='',
     author='Affinitic',
     author_email='info@affinitic.be',
@@ -35,4 +35,4 @@ setup(
     entry_points="""
     # -*- Entry points: -*-
     """,
-    )
+)
