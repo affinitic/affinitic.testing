@@ -1,2 +1,5 @@
 recursive-include docs *
 recursive-include src *
+exclude bootstrap.py
+exclude buildout.cfg
+exclude versions.cfg
