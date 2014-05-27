@@ -34,7 +34,7 @@ class TestDatabaseTestCase(BaseTestCase):
                 self._session.execute(query_count % 'table_b').fetchone()[0])
 
     @property
-    def sql_directory(self):
+    def _sql_directory(self):
         return os.path.join(os.path.dirname(inspect.getfile(self.__class__)),
                             'sql')
 
@@ -101,7 +101,7 @@ class TestDatabaseTestCase(BaseTestCase):
                            {'test_method': None,
                             'db_sql_file': 'table'})
         db_case = db_case_cls(methodName='test_method')
-        filepath = os.path.join(self.sql_directory, 'db_table_insert.sql')
+        filepath = os.path.join(self._sql_directory, 'db_table_insert.sql')
         self.assertEqual([filepath], db_case._sql_files('db', 'insert'))
 
     def test_sql_files_delete(self):
@@ -109,6 +109,17 @@ class TestDatabaseTestCase(BaseTestCase):
                            {'test_method': None,
                             'db_sql_file': ['table_a', 'table_b']})
         db_case = db_case_cls(methodName='test_method')
-        files = [os.path.join(self.sql_directory, 'db_table_b_delete.sql'),
-                 os.path.join(self.sql_directory, 'db_table_a_delete.sql')]
+        files = [os.path.join(self._sql_directory, 'db_table_b_delete.sql'),
+                 os.path.join(self._sql_directory, 'db_table_a_delete.sql')]
         self.assertEqual(files, db_case._sql_files('db', 'delete'))
+
+    def test_custom_sql_directory(self):
+        db_case_cls = type('TestDatabaseTestCase', (DatabaseTestCase, ),
+                           {'test_method': None,
+                            'sql_directory': '../tests/sql/',
+                            'db_sql_file': 'table'})
+        db_case = db_case_cls(methodName='test_method')
+        cls_path = os.path.dirname(inspect.getfile(self.__class__))
+        filepath = os.path.join(cls_path, '..', 'tests', 'sql',
+                                'db_table_insert.sql')
+        self.assertEqual([filepath], db_case._sql_files('db', 'insert'))

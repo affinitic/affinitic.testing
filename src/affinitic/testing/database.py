@@ -51,14 +51,22 @@ class DatabaseTestCase(case.BaseTestCase):
         sql_files = getattr(self, '%s_sql_file' % database)
         if isinstance(sql_files, basestring) is True:
             sql_files = [sql_files]
-        sql_directory = os.path.join(os.path.dirname(inspect.getfile(
-            self.__class__)), 'sql')
+        sql_directory = self._sql_directory
         files = [os.path.join(sql_directory, '%s_%s_%s.sql' % (database, f,
                                                                method))
                  for f in sql_files]
         if method == 'delete':
             files.reverse()
         return files
+
+    @property
+    def _sql_directory(self):
+        """Return the directory with the sql file if the variable
+        sql_directory is not defined the default path is ./sql"""
+        cls_path = os.path.dirname(inspect.getfile(self.__class__))
+        if hasattr(self, 'sql_directory'):
+            return os.path.join(cls_path, self.sql_directory)
+        return os.path.join(cls_path, 'sql')
 
     def _db_session(self, database):
         """ Returns the %s_session property or the database utility """
