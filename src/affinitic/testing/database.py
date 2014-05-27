@@ -54,7 +54,8 @@ class DatabaseTestCase(case.BaseTestCase):
         sql_directory = os.path.join(os.path.dirname(inspect.getfile(
             self.__class__)), 'sql')
         files = [os.path.join(sql_directory, '%s_%s_%s.sql' % (database, f,
-            method)) for f in sql_files]
+                                                               method))
+                 for f in sql_files]
         if method == 'delete':
             files.reverse()
         return files
