@@ -40,11 +40,12 @@ class DatabaseTestCase(case.BaseTestCase):
         """ Executes the sql files to fill or clean the database """
         dbs = [d for d in self.databases if hasattr(self, '%s_sql_file' % d)]
         for database in dbs:
+            session = self._db_session(database)
             for sql_file in self._sql_files(database, method):
                 if os.path.exists(sql_file) is False:
                     raise ValueError('Missing file "%s"' % sql_file)
-                utils.import_data_from_file(self._db_session(database),
-                                            sql_file)
+                utils.import_data_from_file(session, sql_file)
+            session.close()
 
     def _sql_files(self, database, method):
         """ Returns a list of sql file for the given database and method """
