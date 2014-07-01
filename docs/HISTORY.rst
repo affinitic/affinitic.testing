@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.4 (unreleased)
+0.1.4 (2014-07-01)
 ------------------
 
 - Execute all sql instructions in one transaction
