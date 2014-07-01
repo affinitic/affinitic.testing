@@ -10,8 +10,5 @@ Copyright by Affinitic sprl
 
 def import_data_from_file(session, filepath):
     fd = open(filepath, 'r')
-    for statement in fd.read().split(';'):
-        statement = ''.join(statement.splitlines())
-        if statement:
-            session.bind.execute(statement)
+    session.bind.execute(fd.read())
     fd.close()

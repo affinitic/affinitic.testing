@@ -4,6 +4,8 @@ Changelog
 0.1.4 (unreleased)
 ------------------
 
+- Execute all sql instructions in one transaction
+
 - Close database session after inserts
 
 
