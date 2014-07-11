@@ -29,6 +29,7 @@ setup(
         'affinitic.db',
         'mock',
         'setuptools',
+        'sqlparse',
         'unittest2',
         'zope.component',
     ],
