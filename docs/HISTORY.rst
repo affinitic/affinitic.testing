@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.6 (unreleased)
+0.1.6 (2014-07-22)
 ------------------
 
 - Fix an error with some sql statements on multiple lines
