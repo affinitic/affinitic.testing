@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.5 (unreleased)
+0.1.5 (2014-07-22)
 ------------------
 
 - Fix an error with mysql and multiple sql statements
