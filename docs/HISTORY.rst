@@ -4,7 +4,7 @@ Changelog
 0.1.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix a possible error with sql comments
 
 
 0.1.6 (2014-07-22)

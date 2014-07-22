@@ -18,5 +18,6 @@ def import_data_from_file(session, filepath):
 
 
 def split_sql_statements(sql):
-    sql = ' '.join(sql.splitlines())
+    statements = [s.strip() for s in sql.splitlines()]
+    sql = ' '.join([s for s in statements if not s.startswith('--')])
     return sqlparse.split(sql)

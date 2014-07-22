@@ -86,6 +86,8 @@ class TestDatabaseTestCase(BaseTestCase):
         self.assertEqual((0, 0), self._count)
         db_case._execute_sql_files(method='insert')
         self.assertEqual((4, 1), self._count)
+        view_count = self._session.execute('select count(*) from view_a')
+        self.assertEqual(4, view_count.fetchone()[0])
         db_case._execute_sql_files(method='delete')
         self.assertEqual((0, 0), self._count)
 
