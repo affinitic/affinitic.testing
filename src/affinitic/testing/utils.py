@@ -18,5 +18,5 @@ def import_data_from_file(session, filepath):
 
 
 def split_sql_statements(sql):
-    sql = ''.join(sql.splitlines())
+    sql = ' '.join(sql.splitlines())
     return sqlparse.split(sql)

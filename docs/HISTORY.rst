@@ -4,7 +4,7 @@ Changelog
 0.1.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix an error with some sql statements on multiple lines
 
 
 0.1.5 (2014-07-22)

@@ -80,7 +80,8 @@ class TestDatabaseTestCase(BaseTestCase):
         db_case_cls = type('TestDatabaseTestCase', (DatabaseTestCase, ),
                            {'test_method': None,
                             'databases': ('testdb', ),
-                            'testdb_sql_file': ['table_a', 'table_b']})
+                            'testdb_sql_file': ['table_a', 'table_b',
+                                                'view_a']})
         db_case = db_case_cls(methodName='test_method')
         self.assertEqual((0, 0), self._count)
         db_case._execute_sql_files(method='insert')
