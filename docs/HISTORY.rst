@@ -4,7 +4,7 @@ Changelog
 0.1.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix an error with mysql and multiple sql statements
 
 
 0.1.4 (2014-07-01)
