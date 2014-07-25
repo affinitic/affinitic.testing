@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.7 (unreleased)
+0.1.7 (2014-07-25)
 ------------------
 
 - Fix a possible error with sql comments
