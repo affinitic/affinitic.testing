@@ -4,7 +4,7 @@ Changelog
 0.1.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add AdvancedTestRequest class refs #6854
 
 
 0.1.7 (2014-07-25)
