@@ -9,6 +9,8 @@ Copyright by Affinitic sprl
 
 import sqlparse
 
+from Products.Transience.TransientObject import TransientObject
+
 from zope.publisher.browser import TestRequest
 
 
@@ -28,6 +30,10 @@ def split_sql_statements(sql):
 class AdvancedTestRequest(TestRequest):
 
     __items = {}
+
+    def __init__(self, *params, **kw):
+        super(AdvancedTestRequest, self).__init__(*params, **kw)
+        self.SESSION = TransientObject('1234')
 
     def __setitem__(self, key, value):
         """
