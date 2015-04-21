@@ -8,10 +8,16 @@ Copyright by Affinitic sprl
 """
 
 import sqlparse
+import pkg_resources
 
-from Products.Transience.TransientObject import TransientObject
-
-from zope.publisher.browser import TestRequest
+try:
+    pkg_resources.get_distribution('Products.Transience')
+except pkg_resources.DistributionNotFound:
+    HAS_ZOPE = False
+else:
+    HAS_ZOPE = True
+    from Products.Transience.TransientObject import TransientObject
+    from zope.publisher.browser import TestRequest
 
 
 def import_data_from_file(session, filepath):
@@ -27,20 +33,21 @@ def split_sql_statements(sql):
     return sqlparse.split(sql)
 
 
-class AdvancedTestRequest(TestRequest):
+if HAS_ZOPE is True:
+    class AdvancedTestRequest(TestRequest):
 
-    __items = {}
+        __items = {}
 
-    def __init__(self, *params, **kw):
-        super(AdvancedTestRequest, self).__init__(*params, **kw)
-        self.SESSION = TransientObject('1234')
+        def __init__(self, *params, **kw):
+            super(AdvancedTestRequest, self).__init__(*params, **kw)
+            self.SESSION = TransientObject('1234')
 
-    def __setitem__(self, key, value):
-        """
-        """
-        self.__items[key] = value
+        def __setitem__(self, key, value):
+            """
+            """
+            self.__items[key] = value
 
-    def __getitem__(self, key):
-        """
-        """
-        return self.__items[key]
+        def __getitem__(self, key):
+            """
+            """
+            return self.__items[key]
