@@ -1,7 +1,7 @@
 language: python
 python: 2.7
 install:
-  - python bootstrap.py --setuptools-version=8.3 -v 2.3.1
+  - python bootstrap.py --setuptools-version=8.3 -v 2.3.1 -c travis.cfg
   - bin/buildout -N -q -t 3 -c travis.cfg
 script:
   - bin/test
