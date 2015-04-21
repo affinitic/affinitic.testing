@@ -4,13 +4,14 @@ Changelog
 0.1.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Avoid an error if Products.Transience is not available
+  [mpeeters]
 
 
 0.1.8 (2015-03-27)
 ------------------
 
-- Add AdvancedTestRequest class refs #6854
+- Add AdvancedTestRequest class : #6854
 
 
 0.1.7 (2014-07-25)
