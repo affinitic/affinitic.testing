@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.9 (unreleased)
+0.1.9 (2015-04-29)
 ------------------
 
 - Avoid an error if Products.Transience is not available
