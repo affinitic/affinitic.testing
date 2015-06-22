@@ -4,7 +4,8 @@ Changelog
 0.1.10 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Do not use pkg_resources.get_distribution that is not working with Products.Transience
+  [schminitz]
 
 
 0.1.9 (2015-04-29)

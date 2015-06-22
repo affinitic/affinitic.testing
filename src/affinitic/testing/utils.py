@@ -8,16 +8,13 @@ Copyright by Affinitic sprl
 """
 
 import sqlparse
-import pkg_resources
 
 try:
-    pkg_resources.get_distribution('Products.Transience')
-except pkg_resources.DistributionNotFound:
-    HAS_ZOPE = False
-else:
-    HAS_ZOPE = True
     from Products.Transience.TransientObject import TransientObject
     from zope.publisher.browser import TestRequest
+    HAS_ZOPE = True
+except ImportError:
+    HAS_ZOPE = False
 
 
 def import_data_from_file(session, filepath):
