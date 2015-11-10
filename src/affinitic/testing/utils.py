@@ -7,6 +7,9 @@ Licensed under the GPL license, see LICENCE.txt for more details.
 Copyright by Affinitic sprl
 """
 
+from zope.annotation.interfaces import IAnnotations
+from zope.interface import implements
+
 import sqlparse
 
 try:
@@ -32,6 +35,7 @@ def split_sql_statements(sql):
 
 if HAS_ZOPE is True:
     class AdvancedTestRequest(TestRequest):
+        implements(IAnnotations)
 
         __items = {}
 
