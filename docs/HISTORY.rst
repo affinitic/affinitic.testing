@@ -4,7 +4,8 @@ Changelog
 0.1.11 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Add IAnnotation to allow translate() on AdvancedTestRequest refs #7875
+  [aurore]
 
 
 0.1.10 (2015-07-16)
