@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.11 (unreleased)
+0.1.11 (2016-02-01)
 -------------------
 
 - Add IAnnotation to allow translate() on AdvancedTestRequest refs #7875
