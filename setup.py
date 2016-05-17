@@ -32,6 +32,7 @@ setup(
         'sqlparse',
         'unittest2',
         'zope.component',
+        'zope.annotation',
     ],
     extras_require=dict(
         test=['plone.testing']),
