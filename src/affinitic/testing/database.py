@@ -18,23 +18,8 @@ from affinitic.db.interfaces import IDatabase
 from affinitic.testing import case, utils
 
 
-class DatabaseTestCase(case.BaseTestCase):
+class DatabaseBase(object):
     databases = ()
-
-    def run(self, result=None):
-        """ Override of the run method from unittest2.TestCase """
-        try:
-            self._execute_sql_files(method='insert')
-        except Exception:
-            if not hasattr(result, '_start_time'):
-                result._start_time = time.time()
-            result.addError(self, sys.exc_info())
-        else:
-            super(DatabaseTestCase, self).run(result=result)
-            try:
-                self._execute_sql_files(method='delete')
-            except Exception:
-                result.addError(self, sys.exc_info())
 
     def _execute_sql_files(self, method='insert'):
         """ Executes the sql files to fill or clean the database """
@@ -73,3 +58,21 @@ class DatabaseTestCase(case.BaseTestCase):
         """ Returns the %s_session property or the database utility """
         return (getattr(self, '%s_session' % database, None) or
                 zope.component.getUtility(IDatabase, database).session)
+
+
+class DatabaseTestCase(case.BaseTestCase):
+
+    def run(self, result=None):
+        """ Override of the run method from unittest2.TestCase """
+        try:
+            self._execute_sql_files(method='insert')
+        except Exception:
+            if not hasattr(result, '_start_time'):
+                result._start_time = time.time()
+            result.addError(self, sys.exc_info())
+        else:
+            super(DatabaseTestCase, self).run(result=result)
+            try:
+                self._execute_sql_files(method='delete')
+            except Exception:
+                result.addError(self, sys.exc_info())

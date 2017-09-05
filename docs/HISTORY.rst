@@ -4,7 +4,8 @@ Changelog
 0.1.12 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Create a base class for database tests
+  [mpeeters]
 
 
 0.1.11 (2016-02-01)
