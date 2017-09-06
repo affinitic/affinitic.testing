@@ -60,7 +60,7 @@ class DatabaseBase(object):
                 zope.component.getUtility(IDatabase, database).session)
 
 
-class DatabaseTestCase(case.BaseTestCase):
+class DatabaseTestCase(case.BaseTestCase, DatabaseBase):
 
     def run(self, result=None):
         """ Override of the run method from unittest2.TestCase """

@@ -4,7 +4,8 @@ Changelog
 0.1.13 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fix inheritance for DatabaseTestCase
+  [mpeeters]
 
 
 0.1.12 (2017-09-05)
