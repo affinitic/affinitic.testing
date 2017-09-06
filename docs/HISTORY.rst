@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.13 (unreleased)
+0.1.13 (2017-09-06)
 -------------------
 
 - Fix inheritance for DatabaseTestCase
